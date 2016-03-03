@@ -16,20 +16,22 @@ public class Parser {
   public String getContent() throws IOException {
     FileInputStream i = new FileInputStream(file);
     String output = "";
-    int data;
-    while ((data = i.read()) > 0) {
+    int data== i.read();
+    while (data> 0) {
       output += (char) data;
     }
+    i.close();
     return output;
   }
   public String getContentWithoutUnicode() throws IOException {
     FileInputStream i = new FileInputStream(file);
     String output = "";
-    int data;
-    while ((data = i.read()) > 0) {
+    int data=i.read();
+    while (data  > 0) {
       if (data < 0x80) {
         output += (char) data;
       }
+      i.close();
     }
     return output;
   }
@@ -38,5 +40,7 @@ public class Parser {
     for (int i = 0; i < content.length(); i += 1) {
       o.write(content.charAt(i));
     }
+    o.flush();
+    o.close();
   }
 }
